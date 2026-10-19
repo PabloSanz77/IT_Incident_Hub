@@ -1,0 +1,31 @@
+Work item type,Title,Priority,Estimate,Initial state,Notes
+Epic,Gestión del ciclo de vida de incidentes,1,13,New,Crear y operar incidentes
+Epic,Entrega continua y gobernanza DevOps,1,13,New,Automatización calidad seguridad release
+Feature,Registro y consulta de incidentes,1,5,New,Formulario y listado
+Feature,Asignación y flujo de estados,1,5,New,Asignación técnica y estados
+Feature,Seguimiento y dashboard,2,5,New,Comentarios e indicadores
+Feature,CI calidad seguridad y release,1,8,New,Pipelines y versionado
+User Story,Como usuario quiero registrar incidentes para reportar problemas,1,3,New,Relacionar con Feature de registro
+User Story,Como usuario quiero consultar incidentes para conocer su estado,1,3,New,Relacionar con Feature de registro
+User Story,Como técnico quiero ser asignado a incidentes para atenderlos,1,3,New,Relacionar con Feature de asignación
+User Story,Como técnico quiero actualizar estados para reflejar el avance,1,3,New,Relacionar con Feature de asignación
+User Story,Como usuario quiero comentar incidentes para dejar historial,2,3,New,Relacionar con Feature de seguimiento
+User Story,Como supervisor quiero ver indicadores para priorizar trabajo,2,3,New,Relacionar con Feature de seguimiento
+User Story,Como responsable DevOps quiero ejecutar CI para validar cambios,1,5,New,Relacionar con Feature de CI
+User Story,Como responsable DevOps quiero publicar versiones para liberar cambios,1,5,New,Relacionar con Feature de CI
+Task,Crear modelos y esquema inicial de incidentes,1,2,New,Asignar responsable real
+Task,Crear endpoint POST de incidentes,1,2,New,Asignar responsable real
+Task,Crear endpoint GET y filtros,1,2,New,Asignar responsable real
+Task,Crear endpoint PATCH de estado y técnico,1,2,New,Asignar responsable real
+Task,Crear endpoint de comentarios,2,2,New,Asignar responsable real
+Task,Crear dashboard de indicadores,2,2,New,Asignar responsable real
+Task,Configurar pruebas de API,1,2,New,Asignar responsable real
+Task,Configurar pruebas de frontend,1,2,New,Asignar responsable real
+Task,Crear Docker Compose,1,2,New,Asignar responsable real
+Task,Crear workflow GitHub Actions,1,2,New,Asignar responsable real
+Task,Crear Azure Pipeline,1,3,New,Asignar responsable real
+Task,Configurar agente autohospedado,1,3,New,Asignar responsable real
+Task,Revisar dependencias y vulnerabilidades,1,2,New,Asignar responsable real
+Task,Documentar cinco deudas técnicas,2,2,New,Asignar responsable real
+Task,Resolver deuda técnica de migraciones,1,3,New,Asignar responsable real
+Task,Preparar release y checklist v1.0.0,1,3,New,Asignar responsable real

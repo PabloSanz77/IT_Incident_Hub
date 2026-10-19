@@ -1,0 +1,60 @@
+trigger:
+  branches:
+    include:
+      - main
+      - feature/*
+      - fix/*
+      - refactor/*
+
+pr:
+  branches:
+    include:
+      - main
+
+pool:
+  # Cambiar a un pool de agente autohospedado configurado en Azure DevOps
+  # cuando el agente esté registrado y en línea.
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+    fetchDepth: 0
+
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.12'
+    displayName: 'Seleccionar Python'
+
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r backend/requirements.txt
+    displayName: 'Instalar dependencias backend'
+
+  - script: |
+      cd backend
+      python -m pytest -v
+    displayName: 'Ejecutar pruebas backend'
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '22.x'
+    displayName: 'Seleccionar Node.js'
+
+  - script: |
+      cd frontend
+      npm install
+      npm run build
+      npm test
+    displayName: 'Build y pruebas frontend'
+
+  - script: |
+      mkdir -p "$(Build.ArtifactStagingDirectory)/incident-hub"
+      cp -r backend frontend database docs devops "$(Build.ArtifactStagingDirectory)/incident-hub/"
+      cp compose.yaml README.md "$(Build.ArtifactStagingDirectory)/incident-hub/"
+    displayName: 'Preparar artefacto'
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)/incident-hub'
+      artifact: 'incident-hub'
+    displayName: 'Publicar artefacto'
