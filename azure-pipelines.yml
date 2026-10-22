@@ -24,11 +24,12 @@ steps:
     displayName: 'Seleccionar Python'
 
   - script: |
+      python -m ensurepip --upgrade
       python -m pip install --upgrade pip
       python -m pip install -r backend/requirements.txt
       python -m pip install pytest
     displayName: 'Instalar dependencias backend'
-
+    
   - script: | 
       cd backend  
       python -m pytest -v
