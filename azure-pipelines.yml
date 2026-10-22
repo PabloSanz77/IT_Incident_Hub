@@ -12,9 +12,7 @@ pr:
       - main
 
 pool:
-  # Cambiar a un pool de agente autohospedado configurado en Azure DevOps
-  # cuando el agente esté registrado y en línea.
-  vmImage: ubuntu-latest
+  name: 'IT_Incident_Hub_Local'
 
 steps:
   - checkout: self
