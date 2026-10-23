@@ -33,11 +33,11 @@ steps:
   - task: PowerShell@2
     displayName: 'Ejecutar pruebas backend'
     inputs:
-    targetType: 'inline'
-    script: |
-      Set-Location "$(Build.SourcesDirectory)\backend"
-      $env:PYTHONPATH = "$(Build.SourcesDirectory)\backend"
-      python -m pytest tests -v
+        targetType: 'inline'
+        script: |
+          Set-Location "$(Build.SourcesDirectory)\backend"
+          $env:PYTHONPATH = "$(Build.SourcesDirectory)\backend"
+          python -m pytest tests -v
 
   - task: NodeTool@0
     inputs:
