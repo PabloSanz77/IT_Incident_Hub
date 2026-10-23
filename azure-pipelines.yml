@@ -35,8 +35,9 @@ steps:
     inputs:
     targetType: 'inline'
     script: |
+      Set-Location "$(Build.SourcesDirectory)\backend"
       $env:PYTHONPATH = "$(Build.SourcesDirectory)\backend"
-      python -m pytest backend/tests -v
+      python -m pytest tests -v
 
   - task: NodeTool@0
     inputs:
