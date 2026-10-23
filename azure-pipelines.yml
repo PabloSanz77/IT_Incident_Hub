@@ -30,11 +30,16 @@ steps:
       python -m pip install pytest
     displayName: 'Instalar dependencias backend'
     
-  - script: | 
-      cd backend  
+  - script: |
+      python --version
+      python -m pip --version
+      python -m pip show pytest
+      python -m pip install pytest
+      python -m pytest --version
+      cd backend
       python -m pytest -v
     displayName: 'Ejecutar pruebas backend'
-
+    
   - task: NodeTool@0
     inputs:
       versionSpec: '22.x'
