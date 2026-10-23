@@ -31,7 +31,7 @@ steps:
     displayName: 'Instalar dependencias backend'
     
   - script: |
-      python -m pip install pytest
+      $env:PYTHONPATH = "$(Build.SourcesDirectory)\backend"
       python -m pytest backend/tests -v
     displayName: 'Ejecutar pruebas backend'
 
