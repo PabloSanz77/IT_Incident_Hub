@@ -36,3 +36,9 @@ Las pruebas usan una base SQLite temporal y no requieren PostgreSQL.
 
 ## Importante sobre la entrega académica
 Este ZIP es una base de trabajo. No crea automáticamente recursos en tu cuenta de Azure DevOps ni en GitHub. Los Boards, PR reales, revisión, agente autohospedado, artefactos publicados, versiones y evidencias deben configurarse y ejecutarse en tus cuentas. No presentes plantillas como si fueran ejecuciones reales.
+
+## Flujo de trabajo con Git
+
+- `main`: rama principal del proyecto.
+- `feature/pipeline-fix`: rama de trabajo para ajustes de integración continua.
+- Los cambios deben revisarse mediante Pull Requests antes de integrarse en la rama principal.

@@ -30,10 +30,14 @@ steps:
       python -m pip install pytest
     displayName: 'Instalar dependencias backend'
     
-  - script: |
-      $env:PYTHONPATH = "$(Build.SourcesDirectory)\backend"
-      python -m pytest backend/tests -v
+  - task: PowerShell@2
     displayName: 'Ejecutar pruebas backend'
+    inputs:
+        targetType: 'inline'
+        script: |
+          Set-Location "$(Build.SourcesDirectory)\backend"
+          $env:PYTHONPATH = "$(Build.SourcesDirectory)\backend"
+          python -m pytest tests -v
 
   - task: NodeTool@0
     inputs:
