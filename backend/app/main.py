@@ -1,3 +1,4 @@
+import logging
 import os
 from datetime import datetime, timezone
 from enum import Enum
@@ -8,6 +9,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import DateTime, Enum as SAEnum, ForeignKey, String, Text, create_engine, select, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship, sessionmaker, Session
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+)
+
+logger = logging.getLogger("incident_hub")
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./incident_hub.db")
 connect_args = {"check_same_thread": False} if DATABASE_URL.startswith("sqlite") else {}
@@ -109,11 +117,23 @@ def health():
 
 @app.post("/incidents", response_model=IncidentOut, status_code=201)
 def create_incident(payload: IncidentCreate, db: Session = Depends(get_db)):
-    item = Incident(**payload.model_dump())
-    db.add(item)
-    db.commit()
-    db.refresh(item)
-    return item
+    try:
+        item = Incident(**payload.model_dump())
+        db.add(item)
+        db.commit()
+        db.refresh(item)
+
+        logger.info("Incidente creado correctamente: ID=%s", item.id)
+        return item
+
+    except Exception:
+        db.rollback()
+        logger.exception("Error al crear un incidente")
+        raise HTTPException(
+            status_code=500,
+            detail="Error interno al crear el incidente",
+        )
+
 
 @app.get("/incidents", response_model=list[IncidentOut])
 def list_incidents(

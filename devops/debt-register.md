@@ -1,8 +1,18 @@
-# Initial technical debt register (validate and update during development)
-| ID | Debt to verify | Risk | Proposed action |
-|---|---|---|---|
-| TD-01 | No Alembic migrations yet | Schema changes may be unsafe | Add migration scripts and migration test |
-| TD-02 | No authentication/authorization | Any caller may change tickets | Define roles and add authentication |
-| TD-03 | No pagination | Large incident lists may be slow | Add pagination and tests |
-| TD-04 | Minimal API error logging | Diagnosis may be difficult | Add structured logs and request IDs |
-| TD-05 | No dependency lock/security gate policy | Builds can drift; vulnerable packages may pass | Pin/lock dependencies and document scan decisions |
+# Registro de deudas técnicas — IT Incident Hub
+
+| ID | Deuda técnica | Riesgo | Acción propuesta | Estado | Evidencia |
+|---|---|---|---|---|---|
+| TD-01 | No existen migraciones de Alembic | Los cambios en el esquema pueden ser inseguros o difíciles de reproducir. | Incorporar Alembic y scripts de migración. | Pendiente | Revisión de la arquitectura de persistencia. |
+| TD-02 | No existe autenticación ni autorización | Los usuarios podrían acceder o modificar incidentes sin controles de identidad. | Diseñar autenticación y permisos por rol. | Pendiente | Revisión de los endpoints de la API. |
+| TD-03 | No existe paginación | Las consultas podrían tardar más cuando aumente la cantidad de incidentes. | Incorporar paginación y pruebas. | Pendiente | Revisión del endpoint de consulta. |
+| TD-04 | Logging y diagnóstico de errores insuficientes | Los errores pueden ser difíciles de investigar. | Incorporar logging estructurado en operaciones importantes y errores del backend. | Implementada parcialmente; pendiente de validar evidencia adicional. | `backend/app/main.py`; commit `264ac1f`. |
+| ID | Deuda técnica | Riesgo | Acción propuesta | Estado |
+|---|---|---|---|---|
+| TD-05 | Falta de bloqueo de dependencias y controles de seguridad | Las instalaciones pueden variar y podrían introducirse paquetes vulnerables. | Ejecutar `pip-audit`, documentar los resultados e incorporar un mecanismo de bloqueo de dependencias. | Auditoría realizada; bloqueo pendiente. |
+
+## Criterios de seguimiento
+
+- Mantener identificadores únicos para las deudas técnicas.
+- Registrar el riesgo, la acción propuesta y el estado de cada deuda.
+- Vincular los cambios con commits, pruebas o solicitudes de extracción cuando exista evidencia.
+- No marcar una deuda como resuelta hasta comprobar que la corrección está implementada y validada.
